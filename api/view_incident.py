@@ -17,6 +17,9 @@ def create_new_incident():
 def get_all_new_incidents():
     return call_incident.get_mall_incidents()
 
+@app.route('api/v1/incidents/<int:incident_id>', methods = ['GET'])
+def get_single_incidents(incident_id):
+    return call_incident.get_a_specific_incident(incident_id)
 
 
 

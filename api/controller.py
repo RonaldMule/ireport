@@ -48,4 +48,7 @@ class IncidentController():
         return jsonify ({'status':200, 
                         'data':incident_list.get_incident_json()
         }),200
-  
+    
+    def get_a_specific_incident(self,incident_id ):
+        response = incident_list.get_incident_by_id(incident_id)
+        return jsonify({'data':response}) 
