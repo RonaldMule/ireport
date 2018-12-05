@@ -43,5 +43,9 @@ class IncidentController():
              "message": f"created {flag_type} "}]
                 
             }), 201
-
+    def get_mall_incidents(self):
+        '''geting all incidents '''
+        return jsonify ({'status':200, 
+                        'data':incident_list.get_incident_json()
+        }),200
   

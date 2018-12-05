@@ -9,9 +9,16 @@ app = Flask(__name__)
 def index():
     return jsonify({"message": "hello browser do yo see me"})
 
-@app.route('/incidents', methods= ['POST'])
+@app.route('api/v1/incidents', methods= ['POST'])
 def create_new_incident():
     return call_incident.create_incident()
+
+@app.route('api/v1/incidents', methods = ['GET'])
+def get_all_new_incidents():
+    return call_incident.get_mall_incidents()
+
+
+
 
 
 
