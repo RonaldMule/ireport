@@ -30,7 +30,7 @@ iReporter enables any/every citizen to bring any form of corruption to the notic
 - Users can add videos to their red-flag or intervention records, to support their claims
 
 ## Getting Started
-Clone the project from this [link(https://github.com/RonaldMule/ireport)
+Clone the project from this [link](https://github.com/RonaldMule/ireport)
 
 ## Prerequisites
 
