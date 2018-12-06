@@ -63,11 +63,21 @@ class IncidentController():
                           'data': delete_incident,  
                          'message':'Incident successfuly deleted.\
                          however we advice you to report any incidences'
-
              }),200
         return jsonify({'status': 200,
-                        'message': 'incident record not found'
-                        
-                        }), 200
+                        'message': 'incident record not found'                      
+            }), 200
+
+    def update_location(self, incident_id, status='Draft'):
+        response = incident_list.get_incident_by_id(incident_id)
+        if response:
+            data = request.get_json(force=True)
+            #status = data.get('status')
+            if response['status'] == 'Draft':
+                response.update(location = data['location'])
+                return jsonify({'message': 'update location was successfully made'})
+            return jsonify({'message': 'you can not update that please'})  
+        return jsonify({'message':" no incidents currently"})
+    
     
 

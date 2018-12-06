@@ -25,7 +25,9 @@ def get_single_incidents(incident_id):
 def delete_single_incidents(incident_id):
     return call_incident.delete_a_specific_incident(incident_id)
 
-
+@app.route('/api/v1/incidents/<int:incident_id>/location', methods = ['PATCH'])
+def update_incident_location(incident_id):
+    return call_incident.update_location(incident_id)
 
 
 
