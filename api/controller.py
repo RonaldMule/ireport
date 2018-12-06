@@ -72,7 +72,6 @@ class IncidentController():
         response = incident_list.get_incident_by_id(incident_id)
         if response:
             data = request.get_json(force=True)
-            #status = data.get('status')
             if response['status'] == 'Draft':
                 response.update(location = data['location'])
                 return jsonify({'message': 'update location was successfully made'})
