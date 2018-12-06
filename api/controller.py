@@ -50,4 +50,24 @@ class IncidentController():
     
     def get_a_specific_incident(self,incident_id ):
         response = incident_list.get_incident_by_id(incident_id)
-        return jsonify({'data':response}) 
+        if response:
+            return jsonify({'data':response})
+        return jsonify({'message': 'No incident found  please'}) 
+
+    def delete_a_specific_incident(self, incident_id):
+        incident = incident_list.get_incident_by_id(incident_id)
+        if incident:
+            delete_incident = incident_list.delete_incident(incident_id)
+ 
+            return jsonify ({'status': 200, 
+                          'data': delete_incident,  
+                         'message':'Incident successfuly deleted.\
+                         however we advice you to report any incidences'
+
+             }),200
+        return jsonify({'status': 200,
+                        'message': 'incident record not found'
+                        
+                        }), 200
+    
+

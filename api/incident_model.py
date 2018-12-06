@@ -57,5 +57,11 @@ class IncidentDb():
         for incident in self.incident_list:
             if incident.incident_id == incident_id:
                 return incident.to_json()
-        return "The incident could not be found"      
+        return "The incident could not be found"   
+    def delete_incident(self, incident_id):
+        new_incidentList=[]
+        for incident in self.incident_list:
+            if incident.incident_id != incident_id:
+                new_incidentList.append(incident.to_json())
+                return new_incidentList   
 

@@ -21,6 +21,14 @@ def get_all_new_incidents():
 def get_single_incidents(incident_id):
     return call_incident.get_a_specific_incident(incident_id)
 
+@app.route('/api/v1/incidents/<int:incident_id>', methods = ['DELETE'])
+def delete_single_incidents(incident_id):
+    return call_incident.delete_a_specific_incident(incident_id)
+
+
+
+
+
 
 
 
