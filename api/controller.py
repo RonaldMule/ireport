@@ -77,6 +77,19 @@ class IncidentController():
                 return jsonify({'message': 'update location was successfully made'})
             return jsonify({'message': 'you can not update that please'})  
         return jsonify({'message':" no incidents currently"})
+
+    def update_comment(self, incident_id, status='Draft'):
+
+        response = incident_list.get_incident_by_id(incident_id)
+        if response:
+            data = request.get_json(force=True)
+            if response['status'] == 'Draft':
+                response.update(comment = data['comment'])
+                return jsonify({'message': 'comment successfully updated'})
+            return jsonify({'message': 'you can not update that please'})  
+        return jsonify({'message':" no incidents currently"})  
+
+    
     
     
 

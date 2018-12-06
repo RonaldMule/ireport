@@ -29,6 +29,10 @@ def delete_single_incidents(incident_id):
 def update_incident_location(incident_id):
     return call_incident.update_location(incident_id)
 
+@app.route('/api/v1/incidents/<int:incident_id>/comment', methods = ['PATCH'])
+def update_incident_comment(incident_id):
+    return call_incident.update_comment(incident_id)    
+
 
 
 
