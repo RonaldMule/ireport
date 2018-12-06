@@ -8,7 +8,6 @@ class IncidentController():
   
     def create_incident(self):
         data = request.get_json()
-        incident_id = data.get("incident_id")
         createdBy = data.get("createdBy")
         createdOn = data.get("created_on")
         flag_type = data.get("flag_type")
