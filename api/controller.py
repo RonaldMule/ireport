@@ -55,39 +55,51 @@ class IncidentController():
         return jsonify({'message': 'No incident found  please'}) 
 
     def delete_a_specific_incident(self, incident_id):
-        incident = incident_list.get_incident_by_id(incident_id)
-        if incident:
-            delete_incident = incident_list.delete_incident(incident_id)
- 
+        response = incident_list.get_incident_by_id(incident_id)
+        if response:
+            incident_list.incident_list.remove(response)
             return jsonify ({'status': 200, 
-                          'data': delete_incident,  
-                         'message':'Incident successfuly deleted.\
-                         however we advice you to report any incidences'
+
+                          'data': [{'incident':incident_id,  
+                         'message':'Incident successfuly deleted'
+                          }]
              }),200
         return jsonify({'status': 200,
                         'message': 'incident record not found'                      
             }), 200
 
-    def update_location(self, incident_id, status='Draft'):
+    def update_location(self, incident_id):
+        response = incident_list.get_incident_by_id(incident_id)
+        if response:
+            data = request.get_json()
+            if response['status'] == 'Draft':
+                incident_list.get_incident_by_id(incident_id).update(location = data['location'])
+                return jsonify({ 'status': 201,
+                    'data': [{ "incident_id": incident_id,
+                                "message":  'Updated red-flag record\'s location'  
+                    }]
+                })
+            return jsonify({"status": 400,
+                    'error': 'you can not update that please'})  
+
+        return jsonify({"status":400,
+            'error':" no incidents currently"})
+
+    def update_comment(self, incident_id):
         response = incident_list.get_incident_by_id(incident_id)
         if response:
             data = request.get_json(force=True)
             if response['status'] == 'Draft':
-                response.update(location = data['location'])
-                return jsonify({'message': 'update location was successfully made'})
-            return jsonify({'message': 'you can not update that please'})  
-        return jsonify({'message':" no incidents currently"})
-
-    def update_comment(self, incident_id, status='Draft'):
-
-        response = incident_list.get_incident_by_id(incident_id)
-        if response:
-            data = request.get_json(force=True)
-            if response['status'] == 'Draft':
-                response.update(comment = data['comment'])
-                return jsonify({'message': 'comment successfully updated'})
-            return jsonify({'message': 'you can not update that please'})  
-        return jsonify({'message':" no incidents currently"})  
+                incident_list.get_incident_by_id(incident_id).update(comment = data['comment'])
+                return jsonify({ "status": 400,
+                        "data":[{"incident_id":incident_id,
+                            'message': 'comment successfully updated'}]
+                    })
+            #print(response)
+            return jsonify({'status': 400,
+                    'error': 'you can not update that please'})  
+        return jsonify({'status':400,
+            'error':' no incidents currently'}) 
 
     
     

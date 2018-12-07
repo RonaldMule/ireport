@@ -40,28 +40,16 @@ class IncidentDb():
         self.incident_list = []
 
     def add_incident(self,incident):
-        self.incident_list.append(incident)
-        print (self.incident_list)
-     
-
-    
-    def get_all_incidents(self):
-        # print(self.incident_list)
-       
-         self.incident_list
-
+        self.incident_list.append(incident.to_json())
+          
     def get_incident_json(self):
-        return [incident.to_json() for incident in self.incident_list]  
+        ''' A method for getting all incidents '''
+        return self.incident_list 
+ 
 
     def get_incident_by_id(self, incident_id):
         for incident in self.incident_list:
-            if incident.incident_id == incident_id:
-                return incident.to_json()
-        return "The incident could not be found"   
-    def delete_incident(self, incident_id):
-        new_incidentList=[]
-        for incident in self.incident_list:
-            if incident.incident_id != incident_id:
-                new_incidentList.append(incident.to_json())
-                return new_incidentList   
-
+            if incident['incident_id'] == incident_id:
+                return incident
+        return None   
+   
