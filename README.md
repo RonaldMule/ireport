@@ -1,5 +1,5 @@
 # ireport
-```
+
 
 [![Build Status](https://travis-ci.org/RonaldMule/ireport.svg?branch=coveralls)](https://travis-ci.org/RonaldMule/ireport)
 
@@ -7,7 +7,7 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/0f475ef3c01c3c499cf1/maintainability)](https://codeclimate.com/github/RonaldMule/ireport/maintainability)
 
-```
+
 ## About
 
 iReporter enables any/every citizen to bring any form of corruption to the notice of appropriate authorities and the general public. Users can also report on things that needs government intervention
