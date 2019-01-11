@@ -1,4 +1,4 @@
-import itertools
+
 from datetime import datetime
 class Base_Incident(object):
     def __init__(self, createdOn, createdBy, flag_type, location): 
