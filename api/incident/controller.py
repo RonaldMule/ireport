@@ -41,8 +41,8 @@ class IncidentController():
                             'error': 'Please verify the location'}),400                                           
        
 
-        incident = Incident(Base_Incident(createdOn, createdBy, 
-         flag_type, location), status, images, videos, comment)
+        incident = Incident(Base_Incident(createdBy, status, 
+         flag_type, location), images, videos, comment)
         
         self.conn_db.add_incident(incident)
      

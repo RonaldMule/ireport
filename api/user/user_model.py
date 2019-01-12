@@ -1,19 +1,20 @@
-
+from datetime import datetime
 class BaseUser(object):
-    def __init__(self,firstname, lastname, othernames,username, password):
+    def __init__(self,firstname, lastname,username, password):
         self.firstname = firstname
-        self.lastname = lastname
-        self.othernames = othernames
+        self.lastname = lastname        
         self.username = username
         self.password = password
+        
 
 class User(object):
     class_counter = 0
-    def __init__(self, base_user, phoneNumber, email, registered, isAdmin):
+    def __init__(self, base_user, phoneNumber, email,othernames):
         self.base_user = base_user
+        self.othernames = othernames
         self.phoneNumber = phoneNumber
         self.email = email
-        self.registered = False
+        self.registered = str(datetime.utcnow())
         self.isAdmin = None
         self.user_id = User.class_counter
         User.class_counter += 1
@@ -23,7 +24,7 @@ class User(object):
         return {
               "firstname": self.base_user.firstname,
               "lastname": self.base_user.lastname,
-              "othernames": self.base_user.othernames,
+              "othernames": self.othernames,
               "username": self.base_user.username,
               "password": self.base_user.password,
               "phoneNumber": self.phoneNumber,

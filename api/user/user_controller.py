@@ -1,7 +1,7 @@
 from flask import jsonify, request
 from api.user.user_model import User, UserDb, BaseUser
 from api.user.validate_user import UserValidator
-import re
+
 
 class UserController():
     def __init__(self):
@@ -17,22 +17,10 @@ class UserController():
         password = data.get('password')
         phoneNumber = data.get('phoneNumber')
         email  = data.get('email')
-        registered = data.get('registered')
-        isAdmin = data.get('isAdmin')
+        #registered = data.get('registered')
+        #isAdmin = data.get('isAdmin')
 
         ''' Validation of user input '''
-        if not isinstance(firstname, str) or firstname.isspace():
-            return jsonify({'error': 'first name cannot be empty and should be a string'})
-        elif len(firstname) <=2:
-            return jsonify({'error': 'Enter a firstname valid name'})
-
-        if not isinstance(lastname, str) or lastname.isspace():
-            return jsonify({'error': 'lastname cannot be empty and should be a string'})
-        elif len(lastname) <=2:
-            return jsonify({'error': 'Enter a last valid name'})
-
-        if not isinstance(othernames, str):
-            return jsonify({'error': 'Other name should be a string'})  
 
         if not self.validate.validate_phoneNumber(data['phoneNumber']):
             return jsonify({'error': 'expected the phonenumber to be an int with atleast 10 values '})
@@ -41,15 +29,16 @@ class UserController():
         if not self.validate.validate_password(data['password']):
             return jsonify({'error': 'password should atleast be 8 characters'}) 
 
-        if not isinstance(username, str) or username.isspace():
-            return jsonify({'error': 'username should be  a string and should not be empty'})
-        elif len(username) <=2:
-            return jsonify({'error': 'Enter a valid username'})
-
-        if not isinstance(email, str) or email.isspace():
-            return jsonify({'error': 'Email should not be empty'})
-        elif not re.match(r"[^@.]+@[A-Za-z]+\.[a-z]+", email):
-            return jsonify({'error':'Enter a valid email address'})
+        if self.validate.check_field_type(data['firstname'], data['lastname'], \
+        data['othernames'], data['username']): 
+            return jsonify({'status': 400,
+                            'error': 'field should be a string'
+            }),400   
+           
+        if self.validate.validate_email(data['email']):
+            return jsonify({'status': 400,
+                        'error': 'Please check your email'
+            })
 
         for user in self.conn_user.user_list:
             if user['email'] == data['email']:
@@ -58,8 +47,8 @@ class UserController():
        
             
           
-        user = User(BaseUser(firstname, lastname, othernames,username,password), \
-        phoneNumber, email, registered, isAdmin)
+        user = User(BaseUser(firstname, lastname,username,password), \
+        phoneNumber, email, othernames)
 
         self.conn_user.add_user(user)
         

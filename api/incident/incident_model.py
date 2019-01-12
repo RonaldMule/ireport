@@ -1,20 +1,20 @@
 
 from datetime import datetime
 class Base_Incident(object):
-    def __init__(self, createdOn, createdBy, flag_type, location): 
+    def __init__(self, createdBy, flag_type, location,status): 
         self.createdOn = str(datetime.utcnow())
         self.createdBy = createdBy
         self.flag_type = flag_type
         self.location = location
-
+        self.status = status
     
     
 
 class Incident(object):
     class_counter = 1
-    def __init__(self, base_incident, status, images, videos, comment):
+    def __init__(self, base_incident, images, videos, comment):
         self.base_incident = base_incident
-        self.status = status
+       
         self.images = images
         self.videos = videos
         self.comment = comment
@@ -28,7 +28,7 @@ class Incident(object):
             "createdBy": self.base_incident.createdBy,
             "flag_type": self.base_incident.flag_type,
             "location": self.base_incident.location,
-            "status": self.status,
+            "status": self.base_incident.status,
             "images": self.images,
             "videos": self.videos,
             "comment":self.comment 
