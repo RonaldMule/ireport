@@ -1,7 +1,7 @@
 from flask import Flask
 from api.incident.view_incident import incident_v1
 #from flask_jwt_extended import JWTManager
-from .api.config import  config
+import config
 
 def create_app(config_name):
     '''creating the app instance '''
