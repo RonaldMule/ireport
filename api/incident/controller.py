@@ -28,13 +28,13 @@ class IncidentController():
         
         if not self.validate.validate_flag_type(flag_type):
             return jsonify ({'status': 400,
-            'error': 'The flag_type is not defined. Please note thatit should either be "red-flag" or "intervention"'}),400
+            'error': 'The flag_type is not defined. Please note that, it should either be "red-flag" or "intervention"'}),400
       
-        if self.validate.check_empty_fields(data['comment'], data['createdBy'], data['images'],data['videos']):
+        if self.validate.check_field_type(data['comment'], data['createdBy'], data['images'],data['videos']):
             return jsonify({'status': 400,
-                            'error': 'your data contains empty space or field should be a string'
+                            'error': 'field should be a string'
             }),400    
-                         
+        
         
         if not self.validate.validate_location(location):
             return jsonify({'status': 400,

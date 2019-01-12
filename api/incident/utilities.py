@@ -19,12 +19,10 @@ class IncidentValidator:
         return isinstance(location, list) and len(location)==2 \
         and isinstance(location[0], float) and isinstance(location[1], float)  
     @staticmethod
-    def check_empty_fields(comment,createdBy,images,videos):
-        ''' A method to check for empty space submited by the user '''
-        if not isinstance(comment, str) or comment.isspace() and isinstance(createdBy, str) or createdBy.isspace() \
-        and isinstance(images, str) or images.isspace() and isinstance(videos,str) or videos.isspace():
+    def check_field_type(comment,createdBy,images,videos):
+        ''' A method to check for  wrong data type submited by the user '''
+        if not isinstance(comment, str)  and isinstance(createdBy, str)  \
+        and isinstance(images, str)  and isinstance(videos,str):
             return True
-
-
-
+   
     
