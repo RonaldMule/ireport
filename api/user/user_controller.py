@@ -17,8 +17,7 @@ class UserController():
         password = data.get('password')
         phoneNumber = data.get('phoneNumber')
         email  = data.get('email')
-        registered = data.get('registered')
-        isAdmin = data.get('isAdmin')
+       
 
         ''' Validation of user input '''
         if not isinstance(firstname, str) or firstname.isspace():
@@ -55,12 +54,10 @@ class UserController():
             if user['email'] == data['email']:
                 return jsonify({'message': 'user already existis please login'})
                 
-        if  isinstance(registered, bool) or  self.conn_user.get_registered_user(email):
-            return jsonify({'error':"i dont know what i am doing"})
-            
+        
           
-        user = User(BaseUser(firstname, lastname, othernames,username,password), \
-        phoneNumber, email, registered, isAdmin)
+        user = User(BaseUser(firstname, lastname, othernames,username), \
+        phoneNumber, email, password)
 
         self.conn_user.add_user(user)
         

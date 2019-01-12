@@ -1,20 +1,19 @@
 
 class BaseUser(object):
-    def __init__(self,firstname, lastname, othernames,username, password):
+    def __init__(self,firstname, lastname, othernames,username):
         self.firstname = firstname
         self.lastname = lastname
         self.othernames = othernames
         self.username = username
-        self.password = password
+        
 
 class User(object):
     class_counter = 0
-    def __init__(self, base_user, phoneNumber, email, registered, isAdmin):
+    def __init__(self, base_user, phoneNumber, email,password):
         self.base_user = base_user
         self.phoneNumber = phoneNumber
-        self.email = email
-        self.registered = False
-        self.isAdmin = None
+        self.email = email  
+        self.password = password    
         self.user_id = User.class_counter
         User.class_counter += 1
 
