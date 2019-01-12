@@ -11,14 +11,14 @@ class IncidentController():
     def create_incident(self):
         '''  A method to create an incidence '''
         data = request.get_json()
-        createdBy = data.get("createdBy").strip()
+        createdBy = data.get("createdBy")
         createdOn = data.get("created_on")
         flag_type = data.get("flag_type")
         location = data.get("location")
-        status = data.get("status").strip()
-        images = data.get("images").strip()
-        videos = data.get("videos").strip()
-        comment = data.get("comment").strip()
+        status = data.get("status")
+        images = data.get("images")
+        videos = data.get("videos")
+        comment = data.get("comment")
       
         '''validation of user input fields '''
     
@@ -29,19 +29,13 @@ class IncidentController():
         if not self.validate.validate_flag_type(flag_type):
             return jsonify ({'status': 400,
             'error': 'The flag_type is not defined. Please note thatit should either be "red-flag" or "intervention"'}),400
-        if not isinstance(comment, str) or comment.isspace():
+      
+        if self.validate.check_empty_fields(data['comment'], data['createdBy'], data['images'],data['videos']):
             return jsonify({'status': 400,
-                            'error': 'The comment should be a string'}),400
-        if not isinstance(createdBy, str) or createdBy.isspace():
-            return jsonify({'status': 400,
-                            'error': 'The createdBy should be a string'}),400 
-        if not  isinstance(images, str) or images.isspace():
-            return jsonify({'status': 400,
-                            'error': 'The image should be a string'}),400  
-        if not  isinstance(videos,str) or videos.isspace():
-            return jsonify({'status': 400,
-                            'error': 'The video should be a string'}),400 
-
+                            'error': 'your data contains empty space or field should be a string'
+            }),400    
+                         
+        
         if not self.validate.validate_location(location):
             return jsonify({'status': 400,
                             'error': 'Please verify the location'}),400                                           

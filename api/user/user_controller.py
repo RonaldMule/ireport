@@ -55,8 +55,7 @@ class UserController():
             if user['email'] == data['email']:
                 return jsonify({'message': 'user already existis please login'})
                 
-        if  isinstance(registered, bool) or  self.conn_user.get_registered_user(email):
-            return jsonify({'error':"i dont know what i am doing"})
+       
             
           
         user = User(BaseUser(firstname, lastname, othernames,username,password), \
